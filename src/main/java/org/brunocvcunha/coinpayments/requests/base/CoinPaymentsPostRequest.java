@@ -39,7 +39,6 @@ import lombok.extern.log4j.Log4j;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Log4j
 public abstract class CoinPaymentsPostRequest<T> extends CoinPaymentsRequest<T> {
 
     @Override
@@ -57,16 +56,16 @@ public abstract class CoinPaymentsPostRequest<T> extends CoinPaymentsRequest<T> 
         post.addHeader("Accept-Language", "en-US");
         
         String payload = getPayload();
-        log.info("Base Payload: " + payload);
+        System.out.println("Base Payload: " + payload);
         
         payload += "&version=1&key=" + api.getPublicKey() + "&format=json";
         
         String hmac = HmacUtils.hmacSha512Hex(api.getPrivateKey(), payload);
-        log.info("HMAC: " + hmac);
+        System.out.println("HMAC: " + hmac);
         
         post.addHeader("HMAC", hmac);
-        
-        log.info("Final Payload: " + payload);
+
+        System.out.println("Final Payload: " + payload);
         post.setEntity(new StringEntity(payload));
         
         HttpResponse response = api.getClient().execute(post);

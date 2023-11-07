@@ -15,19 +15,11 @@
  */
 package org.brunocvcunha.coinpayments.requests;
 
-import lombok.extern.log4j.Log4j;
+import com.fasterxml.jackson.core.type.TypeReference;
+import lombok.*;
 import org.brunocvcunha.coinpayments.model.CreateTransactionResponse;
 import org.brunocvcunha.coinpayments.model.ResponseWrapper;
 import org.brunocvcunha.coinpayments.requests.base.CoinPaymentsPostRequest;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 
 /**
  * CoinPaymentsCreateTransactionRequest
@@ -39,7 +31,6 @@ import lombok.SneakyThrows;
 @AllArgsConstructor
 @Data
 @Builder
-@Log4j
 public class CoinPaymentsCreateTransactionRequest
         extends CoinPaymentsPostRequest<ResponseWrapper<CreateTransactionResponse>> {
 
@@ -80,7 +71,7 @@ public class CoinPaymentsCreateTransactionRequest
     @Override
     @SneakyThrows
     public ResponseWrapper<CreateTransactionResponse> parseResult(int statusCode, String content) {
-        log.debug("parsing CreateTransactionResponse:  "+ content + ", statusCode: " + statusCode);
+        System.out.println("parsing CreateTransactionResponse:  "+ content + ", statusCode: " + statusCode);
         ResponseWrapper<CreateTransactionResponse> wrapper = parseJson(content,
                 new TypeReference<ResponseWrapper<CreateTransactionResponse>>() {
                 });

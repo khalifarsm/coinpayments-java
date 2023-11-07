@@ -32,7 +32,6 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-@Log4j
 public abstract class CoinPaymentsRequest<T> {
 
     @Getter
@@ -85,7 +84,7 @@ public abstract class CoinPaymentsRequest<T> {
      */
     @SneakyThrows
     public <U> U parseJson(String str, Class<U> clazz) {
-        log.trace("Reading " + clazz.getSimpleName() + " from " + str);
+        System.out.println("Reading " + clazz.getSimpleName() + " from " + str);
         return new ObjectMapper().readValue(str, clazz);
     }
     
@@ -100,7 +99,7 @@ public abstract class CoinPaymentsRequest<T> {
      */
     @SneakyThrows
     public <U> U parseJson(String str, TypeReference<T> type) {
-        log.trace("Reading " + type.getType() + " from " + str);
+        System.out.println("Reading " + type.getType() + " from " + str);
         return new ObjectMapper().readValue(str, type);
     }
 

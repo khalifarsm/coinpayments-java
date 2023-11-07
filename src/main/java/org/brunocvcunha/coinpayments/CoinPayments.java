@@ -15,19 +15,15 @@
  */
 package org.brunocvcunha.coinpayments;
 
-import java.io.IOException;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.log4j.Level;
-import org.brunocvcunha.coinpayments.requests.base.CoinPaymentsRequest;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.log4j.Log4j;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.brunocvcunha.coinpayments.requests.base.CoinPaymentsRequest;
+
+import java.io.IOException;
 
 /**
  * 
@@ -37,12 +33,7 @@ import lombok.extern.log4j.Log4j;
  *
  */
 @Builder
-@Log4j
 public class CoinPayments {
-
-    static {
-        log.setLevel( Level.WARN );
-    }
 
     @Getter
     @Setter
@@ -71,12 +62,12 @@ public class CoinPayments {
      */
     public <T> T sendRequest(CoinPaymentsRequest<T> request) throws ClientProtocolException, IOException {
 
-        log.info("Sending request: " + request.getClass().getName());
+        System.out.println("Sending request: " + request.getClass().getName());
 
         request.setApi(this);
         T response = request.execute();
 
-        log.info("Result for " + request.getClass().getName() + ": " + response);
+        System.out.println("Result for " + request.getClass().getName() + ": " + response);
 
         return response;
     }
